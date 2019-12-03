@@ -66,11 +66,11 @@ export const createTaskEditTemplate = (task) => {
   const {description, tags, dueDate, color, repeatingDays} = task;
   const isExpired = dueDate instanceof Date && dueDate < Date.now();
   const isDateShowing = !!dueDate;
-  const date = isDateShowing ? `${dueDate.getDate()} ${MONTH_NAMES[dueDate.getMonth()]}` : ``;
-  const time = isDateShowing ? formatTime(dueDate) : ``;
   const isRepeatingTask = Object.values(repeatingDays).some(Boolean);
   const repeatClass = isRepeatingTask ? `card--repeat` : ``;
   const deadlineClass = isExpired ? `card--deadline` : ``;
+  const date = isDateShowing ? `${dueDate.getDate()} ${MonthNames[dueDate.getMonth()]}` : ``;
+  const time = isDateShowing ? formatTime(dueDate) : ``;
   const tagsMarkup = createHashtags(tags);
   const colorsMarkup = createColorsMarkup(COLORS, color);
   const repeatingDaysMarkup = createRepeatingDaysMarkup(DAYS, repeatingDays);
@@ -101,8 +101,7 @@ export const createTaskEditTemplate = (task) => {
               <button class="card__date-deadline-toggle" type="button">
                 date: <span class="card__date-status">${isDateShowing ? `yes` : `no`}</span>
               </button>
-              ${
-                isDateShowing ?
+  ${isDateShowing ?
               `<fieldset class="card__date-deadline">
                 <label class="card__input-deadline-wrap">
                   <input
@@ -110,6 +109,7 @@ export const createTaskEditTemplate = (task) => {
                     type="text"
                     placeholder="23 September"
                     name="date"
+                    value="${date} ${time}"
                   />
                 </label>
               </fieldset>` : ``}
@@ -117,11 +117,10 @@ export const createTaskEditTemplate = (task) => {
               <button class="card__repeat-toggle" type="button">
                 repeat:<span class="card__repeat-status">${isRepeatingTask ? `yes` : `no`}</span>
               </button>
-              ${
-                isRepeatingTask ?     
+  ${isRepeatingTask ?     
               `<fieldset class="card__repeat-days">
                 <div class="card__repeat-days-inner">
-                  
+                ${repeatingDaysMarkup}  
                 </div>
                 </fieldset>`
                 : ``
