@@ -1,4 +1,4 @@
-import { COLORS } from '../const.js';
+import {COLORS} from '../const.js';
 
 const DescriptionItems = [`Изучить теорию`, `Сделать домашку`, `Пройти интенсив на соточку`];
 const DefaultRepeatingDays = {
@@ -13,7 +13,7 @@ const DefaultRepeatingDays = {
 
 const Tags = [`homework`, `theory`, `practice`, `intensive`, `keks`];
 
-const getRandomArrayItem = array => {
+const getRandomArrayItem = (array) => {
   const randomIndex = getRandomIntegerNumber(0, array.length);
   return array[randomIndex];
 };
@@ -36,7 +36,7 @@ const generateRepeatingDays = () => {
   });
 };
 
-const generateTags = tags => {
+const generateTags = (tags) => {
   return tags.filter(() => Math.random() > 0.5).slice(0, 3);
 };
 
@@ -52,8 +52,8 @@ const generateCard = () => {
     isArchive: Math.random() > 0.5,
   };
 };
-const generateCards = count => {
+const generateCards = (count) => {
   return new Array(count).fill(``).map(generateCard);
 };
 
-export { generateCard, generateCards };
+export {generateCard, generateCards};
