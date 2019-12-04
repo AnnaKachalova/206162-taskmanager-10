@@ -1,9 +1,9 @@
 const filterNames = [`all`, `overdue`, `today`, `favorites`, `repeating`, `tags`, `archive`];
 
 const generateFilters = () => {
-  return filterNames.map((it) => {
+  return filterNames.map((name) => {
     return {
-      name: it,
+      name,
       count: Math.floor(Math.random() * 10),
     };
   });

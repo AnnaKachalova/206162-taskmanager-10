@@ -1,7 +1,7 @@
 import {COLORS, DAYS, MONTH_NAMES} from '../const.js';
 import {formatTime} from '../utils.js';
 
-const createColorsMarkup = (colors, currentColor) => {
+const createColors = (colors, currentColor) => {
   return colors
     .map((color) => {
       return (
@@ -22,7 +22,7 @@ const createColorsMarkup = (colors, currentColor) => {
     })
     .join(`\n`);
 };
-const createRepeatingDaysMarkup = (days, repeatingDays) => {
+const createRepeatingDays = (days, repeatingDays) => {
   return days
     .map((day) => {
       const isChecked = repeatingDays[day];
@@ -72,8 +72,8 @@ export const createTaskEditTemplate = (task) => {
   const date = isDateShowing ? `${dueDate.getDate()} ${MONTH_NAMES[dueDate.getMonth()]}` : ``;
   const time = isDateShowing ? formatTime(dueDate) : ``;
   const tagsMarkup = createHashtags(tags);
-  const colorsMarkup = createColorsMarkup(COLORS, color);
-  const repeatingDaysMarkup = createRepeatingDaysMarkup(DAYS, repeatingDays);
+  const colorsMarkup = createColors(COLORS, color);
+  const repeatingDaysMarkup = createRepeatingDays(DAYS, repeatingDays);
 
   return `
   <article class="card card--edit card--${color} ${repeatClass} ${deadlineClass}"">

@@ -1,4 +1,4 @@
-export const createFilterMarkup = (filter, isChecked) => {
+export const createFilter = (filter, isChecked) => {
   const {name, count} = filter;
   return `
     <input
@@ -9,13 +9,11 @@ export const createFilterMarkup = (filter, isChecked) => {
         ${isChecked ? `checked` : ``}/>
     <label for="filter__${name}" class="filter__label">
         ${name} <span class="filter__${name}-count">${count}</span>
-    </label>
-
-      `;
+    </label>`;
 };
 
 export const createFilterTemplate = (filters) => {
-  const filtersMarkup = filters.map((it, i) => createFilterMarkup(it, i === 0)).join(`\n`);
+  const filtersMarkup = filters.map((it, i) => createFilter(it, i === 0)).join(`\n`);
 
   return `
     <section class="main__filter filter container">
