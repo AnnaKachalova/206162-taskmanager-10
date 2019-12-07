@@ -58,7 +58,6 @@ const createHashtagsTemplate = (tags) => {
 
 const createTaskEditComponent = (task) => {
   const {description, tags, dueDate, color, repeatingDays} = task;
-  
   const isExpired = dueDate instanceof Date && dueDate < Date.now();
   const isDateShowing = !!dueDate;
   const isRepeatingTask = Object.values(repeatingDays).some(Boolean);
@@ -95,13 +94,12 @@ const createTaskEditComponent = (task) => {
               <div class="card__details">
                 <div class="card__dates">
                   <button class="card__date-deadline-toggle" type="button">
-                    date: <span class="card__date-status">${
-                      isDateShowing ? `yes` : `no`
-                    }</span>
+                    date: <span class="card__date-status">
+  ${isDateShowing ? `yes` : `no`}
+                  </span>
                   </button>
   
-                  ${
-                    isDateShowing
+  ${isDateShowing
                       ? `<fieldset class="card__date-deadline">
                         <label class="card__input-deadline-wrap">
                           <input
@@ -113,29 +111,24 @@ const createTaskEditComponent = (task) => {
                           />
                         </label>
                       </fieldset>`
-                      : ``
-                  }
-  
+                      : ``}
                   <button class="card__repeat-toggle" type="button">
-                    repeat:<span class="card__repeat-status">${
-                      isRepeatingTask ? `yes` : `no`
-                    }</span>
+                    repeat:<span class="card__repeat-status">
+  ${isRepeatingTask ? `yes` : `no`}
+                    </span>
                   </button>
   
-                  ${
-                    isRepeatingTask
-                      ? `<fieldset class="card__repeat-days">
+  ${isRepeatingTask ? `<fieldset class="card__repeat-days">
                       <div class="card__repeat-days-inner">
                         ${repeatingDaysMarkup}
                       </div>
                     </fieldset>`
-                      : ``
-                  }
+                      : ``}
                 </div>
   
                 <div class="card__hashtag">
                   <div class="card__hashtag-list">
-                    ${tagsMarkup}
+  ${tagsMarkup}
                   </div>
   
                   <label>
@@ -152,7 +145,7 @@ const createTaskEditComponent = (task) => {
               <div class="card__colors-inner">
                 <h3 class="card__colors-title">Color</h3>
                 <div class="card__colors-wrap">
-                  ${colorsMarkup}
+  ${colorsMarkup}
                 </div>
               </div>
             </div>
