@@ -7,10 +7,10 @@ import TaskComponent from './components/task.js';
 import TaskEditComponent from './components/edit-task.js';
 
 // mock
-import { generateCards } from './mock/task.js';
-import { generateFilters } from './mock/filter.js';
+import {generateCards} from './mock/task.js';
+import {generateFilters} from './mock/filter.js';
 
-import { render, RenderPosition } from './utils.js';
+import {render, RenderPosition} from './utils.js';
 
 const TASK_COUNT = 22;
 const SHOWING_TASKS_COUNT_ON_START = 8;
@@ -61,7 +61,7 @@ const taskListElement = taskList.getElement().querySelector(`.board__tasks`);
 const tasks = generateCards(TASK_COUNT);
 
 let showingTasksCount = SHOWING_TASKS_COUNT_ON_START;
-tasks.slice(0, showingTasksCount).forEach(task => {
+tasks.slice(0, showingTasksCount).forEach((task) => {
   renderTask(task);
 });
 
@@ -76,7 +76,7 @@ loadMoreButtonComponent.getElement().addEventListener(`click`, () => {
   const prevTasksCount = showingTasksCount;
   showingTasksCount = showingTasksCount + SHOWING_TASKS_COUNT_BY_BUTTON;
 
-  tasks.slice(prevTasksCount, showingTasksCount).forEach(task => renderTask(task));
+  tasks.slice(prevTasksCount, showingTasksCount).forEach((task) => renderTask(task));
 
   if (showingTasksCount >= tasks.length) {
     loadMoreButtonComponent.getElement().remove();

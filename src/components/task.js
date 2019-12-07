@@ -1,9 +1,9 @@
-import { MONTH_NAMES } from '../const.js';
-import { createElement, formatTime } from '../utils.js';
+import {MONTH_NAMES} from '../const.js';
+import {createElement, formatTime} from '../utils.js';
 
-const createHashtagsTemplate = hashtags => {
+const createHashtagsTemplate = (hashtags) => {
   return hashtags
-    .map(hashtag => {
+    .map((hashtag) => {
       return `
     <span class="card__hashtag-inner">
       <span class="card__hashtag-name">
@@ -14,8 +14,8 @@ const createHashtagsTemplate = hashtags => {
     .join(`\n`);
 };
 
-const createTaskCardComponent = task => {
-  const { description, tags, dueDate, color, repeatingDays } = task;
+const createTaskCardComponent = (task) => {
+  const {description, tags, dueDate, color, repeatingDays} = task;
   const isExpired = dueDate instanceof Date && dueDate < Date.now();
   const isDateShowing = !!dueDate;
   const date = isDateShowing

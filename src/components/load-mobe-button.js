@@ -1,4 +1,4 @@
-import { createElement } from '../utils.js';
+import {createElement} from '../utils.js';
 
 const createLoadMoreButtonComponent = () => {
   return `<button class="load-more" type="button">load more</button>`;
