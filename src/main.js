@@ -22,6 +22,7 @@ const renderTask = (taskListElement, task) => {
   const onEscKeyDown = (evt) => {
     const isEscKey = evt.key === `Escape` || evt.key === `Esc`;
 
+    
     if (isEscKey) {
       replaceEditToTask();
       document.removeEventListener(`keydown`, onEscKeyDown);
