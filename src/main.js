@@ -84,9 +84,9 @@ if (isAllTasksArchived) {
 
   loadMoreButtonComponent.getElement().addEventListener(`click`, () => {
     const prevTasksCount = showingTasksCount;
-    showingTasksCount = showingTasksCount + SHOWING_TASKS_COUNT_BY_BUTTON;
+    showingTasksCount += SHOWING_TASKS_COUNT_BY_BUTTON
 
-    tasks.slice(prevTasksCount, showingTasksCount).forEach((task) => renderTask(task));
+    tasks.slice(prevTasksCount, showingTasksCount).forEach((task) => renderTask(taskListElement, task));
 
     if (showingTasksCount >= tasks.length) {
       loadMoreButtonComponent.getElement().remove();
