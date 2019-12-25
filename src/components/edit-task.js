@@ -1,9 +1,10 @@
-import {COLORS, DAYS, MONTH_NAMES} from '../const.js';
-import {formatTime, createElement} from '../utils.js';
+import { COLORS, DAYS, MONTH_NAMES } from '../const.js';
+import { formatTime } from '../utils/render.js';
+import AbstractComponent from './abstract-component.js';
 
 const createColorsTemplate = (colors, currentColor) => {
   return colors
-    .map((color) => {
+    .map(color => {
       return `<input
           type="radio"
           id="color-${color}-4"
@@ -22,7 +23,7 @@ const createColorsTemplate = (colors, currentColor) => {
 };
 const createRepeatingDaysTemplate = (days, repeatingDays) => {
   return days
-    .map((day) => {
+    .map(day => {
       const isChecked = repeatingDays[day];
       return `<input
           class="visually-hidden card__repeat-day-input"
@@ -37,9 +38,9 @@ const createRepeatingDaysTemplate = (days, repeatingDays) => {
     .join(`\n`);
 };
 
-const createHashtagsTemplate = (tags) => {
+const createHashtagsTemplate = tags => {
   return Array.from(tags)
-    .map((tag) => {
+    .map(tag => {
       return `<span class="card__hashtag-inner">
           <input
             type="hidden"
@@ -56,16 +57,14 @@ const createHashtagsTemplate = (tags) => {
     .join(`\n`);
 };
 
-const createTaskEditComponent = (task) => {
-  const {description, tags, dueDate, color, repeatingDays} = task;
+const createTaskEditComponent = task => {
+  const { description, tags, dueDate, color, repeatingDays } = task;
   const isExpired = dueDate instanceof Date && dueDate < Date.now();
   const isDateShowing = !!dueDate;
   const isRepeatingTask = Object.values(repeatingDays).some(Boolean);
   const repeatClass = isRepeatingTask ? `card--repeat` : ``;
   const deadlineClass = isExpired ? `card--deadline` : ``;
-  const date = isDateShowing
-    ? `${dueDate.getDate()} ${MONTH_NAMES[dueDate.getMonth()]}`
-    : ``;
+  const date = isDateShowing ? `${dueDate.getDate()} ${MONTH_NAMES[dueDate.getMonth()]}` : ``;
   const time = isDateShowing ? formatTime(dueDate) : ``;
   const tagsMarkup = createHashtagsTemplate(tags);
   const colorsMarkup = createColorsTemplate(COLORS, color);
@@ -99,7 +98,9 @@ const createTaskEditComponent = (task) => {
                   </span>
                   </button>
   
-  ${isDateShowing ? `<fieldset class="card__date-deadline">
+  ${
+    isDateShowing
+      ? `<fieldset class="card__date-deadline">
     <label class="card__input-deadline-wrap">
                           <input
                             class="card__date"
@@ -110,17 +111,21 @@ const createTaskEditComponent = (task) => {
                           />
                         </label>
                       </fieldset>`
-    : ``}<button class="card__repeat-toggle" type="button">
+      : ``
+  }<button class="card__repeat-toggle" type="button">
                     repeat:<span class="card__repeat-status">
   ${isRepeatingTask ? `yes` : `no`}
                     </span></button>
   
-  ${isRepeatingTask ? `<fieldset class="card__repeat-days">
+  ${
+    isRepeatingTask
+      ? `<fieldset class="card__repeat-days">
                       <div class="card__repeat-days-inner">
                         ${repeatingDaysMarkup}
                       </div>
                     </fieldset>`
-    : ``}</div>
+      : ``
+  }</div>
   
                 <div class="card__hashtag">
                   <div class="card__hashtag-list">
@@ -155,26 +160,18 @@ const createTaskEditComponent = (task) => {
       </article>`;
 };
 
-export default class TaskEdit {
+export default class TaskEdit extends AbstractComponent {
   constructor(task) {
+    super();
     this._task = task;
-
-    this._element = null;
   }
 
   getTemplate() {
     return createTaskEditComponent(this._task);
   }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
+  setSubmitHandler(handler) {
+    this.getElement()
+      .querySelector(`form`)
+      .addEventListener(`submit`, handler);
   }
 }
