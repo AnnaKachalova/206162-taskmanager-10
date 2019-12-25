@@ -1,5 +1,6 @@
 import {COLORS, DAYS, MONTH_NAMES} from '../const.js';
-import {formatTime, createElement} from '../utils.js';
+import {formatTime} from '../utils/render.js';
+import AbstractComponent from './abstract-component.js';
 
 const createColorsTemplate = (colors, currentColor) => {
   return colors
@@ -63,9 +64,7 @@ const createTaskEditComponent = (task) => {
   const isRepeatingTask = Object.values(repeatingDays).some(Boolean);
   const repeatClass = isRepeatingTask ? `card--repeat` : ``;
   const deadlineClass = isExpired ? `card--deadline` : ``;
-  const date = isDateShowing
-    ? `${dueDate.getDate()} ${MONTH_NAMES[dueDate.getMonth()]}`
-    : ``;
+  const date = isDateShowing ? `${dueDate.getDate()} ${MONTH_NAMES[dueDate.getMonth()]}` : ``;
   const time = isDateShowing ? formatTime(dueDate) : ``;
   const tagsMarkup = createHashtagsTemplate(tags);
   const colorsMarkup = createColorsTemplate(COLORS, color);
@@ -110,7 +109,7 @@ const createTaskEditComponent = (task) => {
                           />
                         </label>
                       </fieldset>`
-    : ``}<button class="card__repeat-toggle" type="button">
+    : `` }<button class="card__repeat-toggle" type="button">
                     repeat:<span class="card__repeat-status">
   ${isRepeatingTask ? `yes` : `no`}
                     </span></button>
@@ -120,8 +119,7 @@ const createTaskEditComponent = (task) => {
                         ${repeatingDaysMarkup}
                       </div>
                     </fieldset>`
-    : ``}</div>
-  
+    : `` }</div>
                 <div class="card__hashtag">
                   <div class="card__hashtag-list">
   ${tagsMarkup}
@@ -155,26 +153,18 @@ const createTaskEditComponent = (task) => {
       </article>`;
 };
 
-export default class TaskEdit {
+export default class TaskEdit extends AbstractComponent {
   constructor(task) {
+    super();
     this._task = task;
-
-    this._element = null;
   }
 
   getTemplate() {
     return createTaskEditComponent(this._task);
   }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
+  setSubmitHandler(handler) {
+    this.getElement()
+      .querySelector(`form`)
+      .addEventListener(`submit`, handler);
   }
 }

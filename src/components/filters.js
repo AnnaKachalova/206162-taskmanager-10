@@ -1,4 +1,4 @@
-import {createElement} from '../utils.js';
+import AbstractComponent from './abstract-component.js';
 
 const createFilterTemplate = (filter, isChecked) => {
   const {name, count} = filter;
@@ -15,9 +15,7 @@ const createFilterTemplate = (filter, isChecked) => {
 };
 
 const createFilterComponent = (filters) => {
-  const filtersMarkup = filters
-    .map((it, i) => createFilterTemplate(it, i === 0))
-    .join(`\n`);
+  const filtersMarkup = filters.map((it, i) => createFilterTemplate(it, i === 0)).join(`\n`);
 
   return `
     <section class="main__filter filter container">
@@ -25,21 +23,12 @@ const createFilterComponent = (filters) => {
     </section>
     `;
 };
-export default class Filter {
+export default class Filter extends AbstractComponent {
   constructor(filters) {
-    this._element = null;
+    super();
     this._filters = filters;
   }
   getTemplate() {
     return createFilterComponent(this._filters);
-  }
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-    return this._element;
-  }
-  removeElement() {
-    this._element = null;
   }
 }
