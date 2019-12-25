@@ -109,8 +109,7 @@ const createTaskEditComponent = (task) => {
                           />
                         </label>
                       </fieldset>`
-      : ``
-  }<button class="card__repeat-toggle" type="button">
+  : `` }<button class="card__repeat-toggle" type="button">
                     repeat:<span class="card__repeat-status">
   ${isRepeatingTask ? `yes` : `no`}
                     </span></button>
@@ -120,9 +119,7 @@ const createTaskEditComponent = (task) => {
                         ${repeatingDaysMarkup}
                       </div>
                     </fieldset>`
-      : ``
-  }</div>
-  
+  : `` }</div>
                 <div class="card__hashtag">
                   <div class="card__hashtag-list">
   ${tagsMarkup}
