@@ -11,7 +11,7 @@ const SHOWING_TASKS_COUNT_BY_BUTTON = 8;
 
 // task
 const renderTask = (taskListElement, task) => {
-  const onEscKeyDown = evt => {
+  const onEscKeyDown = (evt) => {
     const isEscKey = evt.key === `Escape` || evt.key === `Esc`;
 
     if (isEscKey) {
