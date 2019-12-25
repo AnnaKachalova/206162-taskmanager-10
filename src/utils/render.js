@@ -3,11 +3,11 @@ export const RenderPosition = {
   BEFOREEND: `beforeend`,
 };
 
-const castTimeFormat = value => {
+const castTimeFormat = (value) => {
   return value < 10 ? `0${value}` : String(value);
 };
 
-export const formatTime = date => {
+export const formatTime = (date) => {
   const hours = castTimeFormat(date.getHours() % 12);
   const minutes = castTimeFormat(date.getMinutes());
 
@@ -16,7 +16,7 @@ export const formatTime = date => {
   return `${hours}:${minutes} ${interval}`;
 };
 
-export const createElement = component => {
+export const createElement = (component) => {
   const newElement = document.createElement(`div`);
   newElement.innerHTML = component;
 
@@ -34,7 +34,7 @@ export const render = (container, component, place) => {
   }
 };
 
-export const remove = component => {
+export const remove = (component) => {
   component.getElement().remove();
   component.removeElement();
 };

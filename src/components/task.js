@@ -1,5 +1,5 @@
-import { MONTH_NAMES } from '../const.js';
-import { formatTime } from '../utils/render.js';
+import {MONTH_NAMES} from '../const.js';
+import {formatTime} from '../utils/render.js';
 import AbstractComponent from './abstract-component.js';
 
 const createHashtagsTemplate = hashtags => {
@@ -15,7 +15,7 @@ const createHashtagsTemplate = hashtags => {
     .join(`\n`);
 };
 
-const createTaskCardComponent = task => {
+const createTaskCardComponent = (task) => {
   const { description, tags, dueDate, color, repeatingDays } = task;
   const isExpired = dueDate instanceof Date && dueDate < Date.now();
   const isDateShowing = !!dueDate;

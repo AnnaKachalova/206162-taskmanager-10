@@ -1,7 +1,7 @@
 import AbstractComponent from './abstract-component.js';
 
 const createFilterTemplate = (filter, isChecked) => {
-  const { name, count } = filter;
+  const {name, count} = filter;
   return `
     <input
         type="radio"
@@ -14,7 +14,7 @@ const createFilterTemplate = (filter, isChecked) => {
     </label>`;
 };
 
-const createFilterComponent = filters => {
+const createFilterComponent = (filters) => {
   const filtersMarkup = filters.map((it, i) => createFilterTemplate(it, i === 0)).join(`\n`);
 
   return `
