@@ -61,7 +61,7 @@ export default class BoardController {
         const prevTasksCount = showingTasksCount;
         showingTasksCount += SHOWING_TASKS_COUNT_BY_BUTTON;
 
-        tasks.slice(prevTasksCount, showingTasksCount).forEach((task) => renderTask(taskListElement, task));
+        renderTasks(taskListElement, tasks.slice(prevTasksCount, showingTasksCount));
         if (showingTasksCount >= tasks.length) {
           remove(this._loadMoreButtonComponent);
         }
