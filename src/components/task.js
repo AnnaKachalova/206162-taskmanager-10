@@ -2,9 +2,9 @@ import {MONTH_NAMES} from '../const.js';
 import {formatTime} from '../utils/render.js';
 import AbstractComponent from './abstract-component.js';
 
-const createHashtagsTemplate = hashtags => {
+const createHashtagsTemplate = (hashtags) => {
   return hashtags
-    .map(hashtag => {
+    .map((hashtag) => {
       return `
     <span class="card__hashtag-inner">
       <span class="card__hashtag-name">
@@ -16,7 +16,7 @@ const createHashtagsTemplate = hashtags => {
 };
 
 const createTaskCardComponent = (task) => {
-  const { description, tags, dueDate, color, repeatingDays } = task;
+  const {description, tags, dueDate, color, repeatingDays} = task;
   const isExpired = dueDate instanceof Date && dueDate < Date.now();
   const isDateShowing = !!dueDate;
   const date = isDateShowing ? `${dueDate.getDate()} ${MONTH_NAMES[dueDate.getMonth()]}` : ``;

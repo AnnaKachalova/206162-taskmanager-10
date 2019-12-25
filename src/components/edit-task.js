@@ -58,7 +58,7 @@ const createHashtagsTemplate = (tags) => {
 };
 
 const createTaskEditComponent = (task) => {
-  const { description, tags, dueDate, color, repeatingDays } = task;
+  const {description, tags, dueDate, color, repeatingDays} = task;
   const isExpired = dueDate instanceof Date && dueDate < Date.now();
   const isDateShowing = !!dueDate;
   const isRepeatingTask = Object.values(repeatingDays).some(Boolean);
@@ -98,9 +98,7 @@ const createTaskEditComponent = (task) => {
                   </span>
                   </button>
   
-  ${
-    isDateShowing
-      ? `<fieldset class="card__date-deadline">
+  ${isDateShowing ? `<fieldset class="card__date-deadline">
     <label class="card__input-deadline-wrap">
                           <input
                             class="card__date"
@@ -117,9 +115,7 @@ const createTaskEditComponent = (task) => {
   ${isRepeatingTask ? `yes` : `no`}
                     </span></button>
   
-  ${
-    isRepeatingTask
-      ? `<fieldset class="card__repeat-days">
+  ${isRepeatingTask ? `<fieldset class="card__repeat-days">
                       <div class="card__repeat-days-inner">
                         ${repeatingDaysMarkup}
                       </div>
