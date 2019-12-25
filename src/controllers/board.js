@@ -10,7 +10,7 @@ const SHOWING_TASKS_COUNT_ON_START = 8;
 const SHOWING_TASKS_COUNT_BY_BUTTON = 8;
 
 const renderTask = (taskListElement, task) => {
-  const onEscKeyDown = evt => {
+  const onEscKeyDown = (evt) => {
     const isEscKey = evt.key === `Escape` || evt.key === `Esc`;
 
     if (isEscKey) {
@@ -61,7 +61,7 @@ export default class BoardController {
         const prevTasksCount = showingTasksCount;
         showingTasksCount += SHOWING_TASKS_COUNT_BY_BUTTON;
 
-        tasks.slice(prevTasksCount, showingTasksCount).forEach(task => renderTask(taskListElement, task));
+        tasks.slice(prevTasksCount, showingTasksCount).forEach((task) => renderTask(taskListElement, task));
         if (showingTasksCount >= tasks.length) {
           remove(this._loadMoreButtonComponent);
         }
@@ -83,7 +83,7 @@ export default class BoardController {
       });
       renderTasks(taskListElement, tasks.slice(0, showingTasksCount));
       renderLoadMoreButton();
-      this._sortComponent.setSortTypeChangeHandler(sortType => {
+      this._sortComponent.setSortTypeChangeHandler((sortType) => {
         let sortedTasks = [];
 
         switch (sortType) {
