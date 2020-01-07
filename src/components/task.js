@@ -4,7 +4,7 @@ import AbstractComponent from './abstract-component.js';
 
 const createHashtagsTemplate = (hashtags) => {
   return hashtags
-    .map(hashtag => {
+    .map((hashtag) => {
       return `
     <span class="card__hashtag-inner">
       <span class="card__hashtag-name">
@@ -22,7 +22,7 @@ const createButtonMarkup = (name, isActive) => {
     </button>`;
 };
 const createTaskCardComponent = (task) => {
-  const { description, tags, dueDate, color, repeatingDays } = task;
+  const {description, tags, dueDate, color, repeatingDays} = task;
   const isExpired = dueDate instanceof Date && dueDate < Date.now();
   const isDateShowing = !!dueDate;
   const date = isDateShowing ? `${dueDate.getDate()} ${MONTH_NAMES[dueDate.getMonth()]}` : ``;
@@ -89,12 +89,12 @@ export default class Task extends AbstractComponent {
   }
   onArchiveButtonClick(element) {
     this.getElement()
-      .querySelector('.card__btn--archive')
+      .querySelector(`.card__btn--archive`)
       .addEventListener('click', element);
   }
   onFavoritesButtonClick(element) {
     this.getElement()
-      .querySelector('.card__btn--favorites')
+      .querySelector(`.card__btn--favorites`)
       .addEventListener('click', element);
   }
 }

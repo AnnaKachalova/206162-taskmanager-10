@@ -40,7 +40,7 @@ export default class BoardController {
     this._tasks = tasks;
     const container = this._container.getElement();
 
-    const isAllTasksArchived = this._tasks.every(task => task.isArchive);
+    const isAllTasksArchived = this._tasks.every((task) => task.isArchive);
 
     if (isAllTasksArchived) {
       render(container, this._noTasksComponent, RenderPosition.BEFOREEND);
@@ -51,10 +51,10 @@ export default class BoardController {
       const taskListElement = container.querySelector(`.board__tasks`);
 
       const newTasks = renderTasks(
-        taskListElement,
-        tasks.slice(0, this._showingTasksCount),
-        this._onDataChange,
-        this._onViewChange
+          taskListElement,
+          tasks.slice(0, this._showingTasksCount),
+          this._onDataChange,
+          this._onViewChange
       );
       this._showedTaskControllers = this._showedTaskControllers.concat(newTasks);
       this._renderLoadMoreButton();
@@ -73,10 +73,10 @@ export default class BoardController {
       this._showingTasksCount = this._showingTasksCount + SHOWING_TASKS_COUNT_BY_BUTTON;
 
       const newTasks = renderTasks(
-        taskListElement,
-        this._tasks.slice(prevTasksCount, this._showingTasksCount),
-        this._onDataChange,
-        this._onViewChange
+          taskListElement,
+          this._tasks.slice(prevTasksCount, this._showingTasksCount),
+          this._onDataChange,
+          this._onViewChange
       );
       this._showedTaskControllers = this._showedTaskControllers.concat(newTasks);
       if (this._showingTasksCount >= this._tasks.length) {
