@@ -90,11 +90,11 @@ export default class Task extends AbstractComponent {
   onArchiveButtonClick(element) {
     this.getElement()
       .querySelector(`.card__btn--archive`)
-      .addEventListener('click', element);
+      .addEventListener(`click`, element);
   }
   onFavoritesButtonClick(element) {
     this.getElement()
       .querySelector(`.card__btn--favorites`)
-      .addEventListener('click', element);
+      .addEventListener(`click`, element);
   }
 }
