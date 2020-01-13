@@ -1,14 +1,14 @@
-import {COLORS, DAYS, MONTH_NAMES} from '../const.js';
-import {formatTime} from '../utils/render.js';
+import { COLORS, DAYS, MONTH_NAMES } from '../const.js';
+import { formatTime } from '../utils/render.js';
 import AbstractSmartComponent from './abstract-smart-component.js';
 
-const isRepeating = (repeatingDays) => {
+const isRepeating = repeatingDays => {
   return Object.values(repeatingDays).some(Boolean);
 };
 
 const createColorsTemplate = (colors, currentColor) => {
   return colors
-    .map((color) => {
+    .map(color => {
       return `<input
           type="radio"
           id="color-${color}-4"
@@ -27,7 +27,7 @@ const createColorsTemplate = (colors, currentColor) => {
 };
 const createRepeatingDaysTemplate = (days, repeatingDays) => {
   return days
-    .map((day) => {
+    .map(day => {
       const isChecked = repeatingDays[day];
       return `<input
           class="visually-hidden card__repeat-day-input"
@@ -42,9 +42,9 @@ const createRepeatingDaysTemplate = (days, repeatingDays) => {
     .join(`\n`);
 };
 
-const createHashtagsTemplate = (tags) => {
+const createHashtagsTemplate = tags => {
   return Array.from(tags)
-    .map((tag) => {
+    .map(tag => {
       return `<span class="card__hashtag-inner">
           <input
             type="hidden"
@@ -62,8 +62,8 @@ const createHashtagsTemplate = (tags) => {
 };
 
 const createTaskEditComponent = (task, options = {}) => {
-  const {description, tags, dueDate, color} = task;
-  const {isDateShowing, isRepeatingTask, activeRepeatingDays} = options;
+  const { description, tags, dueDate, color } = task;
+  const { isDateShowing, isRepeatingTask, activeRepeatingDays } = options;
 
   const isExpired = dueDate instanceof Date && dueDate < Date.now();
 
@@ -107,8 +107,8 @@ const createTaskEditComponent = (task, options = {}) => {
                   </button>
   
   ${
-  isDateShowing
-    ? `<fieldset class="card__date-deadline">
+    isDateShowing
+      ? `<fieldset class="card__date-deadline">
     <label class="card__input-deadline-wrap">
                           <input
                             class="card__date"
@@ -119,21 +119,21 @@ const createTaskEditComponent = (task, options = {}) => {
                           />
                         </label>
                       </fieldset>`
-    : ``
-}<button class="card__repeat-toggle" type="button">
+      : ``
+  }<button class="card__repeat-toggle" type="button">
                     repeat:<span class="card__repeat-status">
   ${isRepeatingTask ? `yes` : `no`}
                     </span></button>
   
   ${
-  isRepeatingTask
-    ? `<fieldset class="card__repeat-days">
+    isRepeatingTask
+      ? `<fieldset class="card__repeat-days">
                       <div class="card__repeat-days-inner">
                         ${repeatingDaysMarkup}
                       </div>
                     </fieldset>`
-    : ``
-}</div>
+      : ``
+  }</div>
                 <div class="card__hashtag">
                   <div class="card__hashtag-list">
   ${tagsMarkup}
@@ -174,7 +174,7 @@ export default class TaskEdit extends AbstractSmartComponent {
     this._isDateShowing = !!task.dueDate;
     this._isRepeatingTask = Object.values(task.repeatingDays).some(Boolean);
     this._activeRepeatingDays = Object.assign({}, task.repeatingDays);
-
+    console.log(task);
     this._subscribeOnEvents();
   }
 
@@ -217,7 +217,7 @@ export default class TaskEdit extends AbstractSmartComponent {
 
     const repeatDays = element.querySelector(`.card__repeat-days`);
     if (repeatDays) {
-      repeatDays.addEventListener(`change`, (evt) => {
+      repeatDays.addEventListener(`change`, evt => {
         this._activeRepeatingDays[evt.target.value] = evt.target.checked;
 
         this.rerender();
